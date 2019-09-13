@@ -1,0 +1,547 @@
+
+recloser_alt.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         0000020c  00000000  00000000  00000054  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .stab         000006cc  00000000  00000000  00000260  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  2 .stabstr      00000090  00000000  00000000  0000092c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  3 .debug_aranges 00000020  00000000  00000000  000009bc  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  4 .debug_pubnames 00000109  00000000  00000000  000009dc  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   000004ac  00000000  00000000  00000ae5  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 000001c3  00000000  00000000  00000f91  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   0000047c  00000000  00000000  00001154  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  000000f0  00000000  00000000  000015d0  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    00000200  00000000  00000000  000016c0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    00000194  00000000  00000000  000018c0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_pubtypes 00000038  00000000  00000000  00001a54  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	12 c0       	rjmp	.+36     	; 0x26 <__ctors_end>
+   2:	19 c0       	rjmp	.+50     	; 0x36 <__bad_interrupt>
+   4:	18 c0       	rjmp	.+48     	; 0x36 <__bad_interrupt>
+   6:	17 c0       	rjmp	.+46     	; 0x36 <__bad_interrupt>
+   8:	16 c0       	rjmp	.+44     	; 0x36 <__bad_interrupt>
+   a:	15 c0       	rjmp	.+42     	; 0x36 <__bad_interrupt>
+   c:	14 c0       	rjmp	.+40     	; 0x36 <__bad_interrupt>
+   e:	13 c0       	rjmp	.+38     	; 0x36 <__bad_interrupt>
+  10:	12 c0       	rjmp	.+36     	; 0x36 <__bad_interrupt>
+  12:	11 c0       	rjmp	.+34     	; 0x36 <__bad_interrupt>
+  14:	10 c0       	rjmp	.+32     	; 0x36 <__bad_interrupt>
+  16:	0f c0       	rjmp	.+30     	; 0x36 <__bad_interrupt>
+  18:	0e c0       	rjmp	.+28     	; 0x36 <__bad_interrupt>
+  1a:	0d c0       	rjmp	.+26     	; 0x36 <__bad_interrupt>
+  1c:	0c c0       	rjmp	.+24     	; 0x36 <__bad_interrupt>
+  1e:	0b c0       	rjmp	.+22     	; 0x36 <__bad_interrupt>
+  20:	0a c0       	rjmp	.+20     	; 0x36 <__bad_interrupt>
+  22:	09 c0       	rjmp	.+18     	; 0x36 <__bad_interrupt>
+  24:	08 c0       	rjmp	.+16     	; 0x36 <__bad_interrupt>
+
+00000026 <__ctors_end>:
+  26:	11 24       	eor	r1, r1
+  28:	1f be       	out	0x3f, r1	; 63
+  2a:	cf e5       	ldi	r28, 0x5F	; 95
+  2c:	d4 e0       	ldi	r29, 0x04	; 4
+  2e:	de bf       	out	0x3e, r29	; 62
+  30:	cd bf       	out	0x3d, r28	; 61
+  32:	ad d0       	rcall	.+346    	; 0x18e <main>
+  34:	e9 c0       	rjmp	.+466    	; 0x208 <_exit>
+
+00000036 <__bad_interrupt>:
+  36:	e4 cf       	rjmp	.-56     	; 0x0 <__vectors>
+
+00000038 <USART_Init>:
+
+
+
+void USART_Init(uint16_t BAUDRATE)				/* USART initialize function */
+{ 
+	uint16_t BAUD_PRESCALE  = (((F_CPU / (BAUDRATE * 16UL))) - 1); /* 51 */
+  38:	9c 01       	movw	r18, r24
+  3a:	40 e0       	ldi	r20, 0x00	; 0
+  3c:	50 e0       	ldi	r21, 0x00	; 0
+  3e:	22 0f       	add	r18, r18
+  40:	33 1f       	adc	r19, r19
+  42:	44 1f       	adc	r20, r20
+  44:	55 1f       	adc	r21, r21
+  46:	22 0f       	add	r18, r18
+  48:	33 1f       	adc	r19, r19
+  4a:	44 1f       	adc	r20, r20
+  4c:	55 1f       	adc	r21, r21
+  4e:	22 0f       	add	r18, r18
+  50:	33 1f       	adc	r19, r19
+  52:	44 1f       	adc	r20, r20
+  54:	55 1f       	adc	r21, r21
+  56:	22 0f       	add	r18, r18
+  58:	33 1f       	adc	r19, r19
+  5a:	44 1f       	adc	r20, r20
+  5c:	55 1f       	adc	r21, r21
+  5e:	60 e0       	ldi	r22, 0x00	; 0
+  60:	72 e1       	ldi	r23, 0x12	; 18
+  62:	8a e7       	ldi	r24, 0x7A	; 122
+  64:	90 e0       	ldi	r25, 0x00	; 0
+  66:	ae d0       	rcall	.+348    	; 0x1c4 <__udivmodsi4>
+  68:	21 50       	subi	r18, 0x01	; 1
+  6a:	30 40       	sbci	r19, 0x00	; 0
+	UCSRB |= (1 << RXEN) | (1 << TXEN);				/* Enable USART transmitter and receiver */
+  6c:	8a b1       	in	r24, 0x0a	; 10
+  6e:	88 61       	ori	r24, 0x18	; 24
+  70:	8a b9       	out	0x0a, r24	; 10
+	UCSRC |= (1 << URSEL)| (1 << UCSZ0) | (1 << UCSZ1);	/* Write USCRC for 8 bit data and 1 stop bit */ 
+  72:	80 b5       	in	r24, 0x20	; 32
+  74:	86 68       	ori	r24, 0x86	; 134
+  76:	80 bd       	out	0x20, r24	; 32
+	UBRRL = BAUD_PRESCALE;							/* Load UBRRL with lower 8 bit of prescale value */
+  78:	29 b9       	out	0x09, r18	; 9
+	UBRRH = (BAUD_PRESCALE >> 8);					/* Load UBRRH with upper 8 bit of prescale value */
+  7a:	30 bd       	out	0x20, r19	; 32
+}
+  7c:	08 95       	ret
+
+0000007e <USART_RxChar>:
+
+char USART_RxChar()									/* Data receiving function */
+{
+	while (!(UCSRA & (1 << RXC)));					/* Wait until new data receive */
+  7e:	5f 9b       	sbis	0x0b, 7	; 11
+  80:	fe cf       	rjmp	.-4      	; 0x7e <USART_RxChar>
+	return(UDR);									/* Get and return received data */ 
+  82:	8c b1       	in	r24, 0x0c	; 12
+}
+  84:	08 95       	ret
+
+00000086 <USART_TxChar>:
+
+void USART_TxChar(char data)						/* Data transmitting function */
+{
+	UDR = data;										/* Write data to be transmitting in UDR */
+  86:	8c b9       	out	0x0c, r24	; 12
+	while (!(UCSRA & (1<<UDRE)));					/* Wait until data transmit and buffer get empty */
+  88:	5d 9b       	sbis	0x0b, 5	; 11
+  8a:	fe cf       	rjmp	.-4      	; 0x88 <USART_TxChar+0x2>
+}
+  8c:	08 95       	ret
+
+0000008e <USART_SendString>:
+
+void USART_SendString(char *str)					/* Send string of USART data function */ 
+{
+  8e:	cf 93       	push	r28
+  90:	df 93       	push	r29
+  92:	ec 01       	movw	r28, r24
+	int i=0;																	
+	while (str[i]!=0)
+  94:	88 81       	ld	r24, Y
+  96:	88 23       	and	r24, r24
+  98:	29 f0       	breq	.+10     	; 0xa4 <USART_SendString+0x16>
+{
+	UDR = data;										/* Write data to be transmitting in UDR */
+	while (!(UCSRA & (1<<UDRE)));					/* Wait until data transmit and buffer get empty */
+}
+
+void USART_SendString(char *str)					/* Send string of USART data function */ 
+  9a:	21 96       	adiw	r28, 0x01	; 1
+{
+	int i=0;																	
+	while (str[i]!=0)
+	{
+		USART_TxChar(str[i]);						/* Send each char of string till the NULL */
+  9c:	f4 df       	rcall	.-24     	; 0x86 <USART_TxChar>
+}
+
+void USART_SendString(char *str)					/* Send string of USART data function */ 
+{
+	int i=0;																	
+	while (str[i]!=0)
+  9e:	89 91       	ld	r24, Y+
+  a0:	88 23       	and	r24, r24
+  a2:	e1 f7       	brne	.-8      	; 0x9c <USART_SendString+0xe>
+	{
+		USART_TxChar(str[i]);						/* Send each char of string till the NULL */
+		i++;
+	}
+}
+  a4:	df 91       	pop	r29
+  a6:	cf 91       	pop	r28
+  a8:	08 95       	ret
+
+000000aa <enable_SIM>:
+
+
+void enable_SIM(){
+  aa:	83 e0       	ldi	r24, 0x03	; 3
+	for(uint8_t i=0 ; i<3; i++){
+		PORTC |=1<<PC1;
+  ac:	a9 9a       	sbi	0x15, 1	; 21
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+  ae:	2f e3       	ldi	r18, 0x3F	; 63
+  b0:	3d e0       	ldi	r19, 0x0D	; 13
+  b2:	43 e0       	ldi	r20, 0x03	; 3
+  b4:	21 50       	subi	r18, 0x01	; 1
+  b6:	30 40       	sbci	r19, 0x00	; 0
+  b8:	40 40       	sbci	r20, 0x00	; 0
+  ba:	e1 f7       	brne	.-8      	; 0xb4 <enable_SIM+0xa>
+  bc:	00 c0       	rjmp	.+0      	; 0xbe <enable_SIM+0x14>
+  be:	00 00       	nop
+		_delay_ms(1000);
+		PORTC &= ~(1<<PC1);
+  c0:	a9 98       	cbi	0x15, 1	; 21
+  c2:	2f e3       	ldi	r18, 0x3F	; 63
+  c4:	3d e0       	ldi	r19, 0x0D	; 13
+  c6:	43 e0       	ldi	r20, 0x03	; 3
+  c8:	21 50       	subi	r18, 0x01	; 1
+  ca:	30 40       	sbci	r19, 0x00	; 0
+  cc:	40 40       	sbci	r20, 0x00	; 0
+  ce:	e1 f7       	brne	.-8      	; 0xc8 <enable_SIM+0x1e>
+  d0:	00 c0       	rjmp	.+0      	; 0xd2 <enable_SIM+0x28>
+  d2:	00 00       	nop
+  d4:	81 50       	subi	r24, 0x01	; 1
+	}
+}
+
+
+void enable_SIM(){
+	for(uint8_t i=0 ; i<3; i++){
+  d6:	51 f7       	brne	.-44     	; 0xac <enable_SIM+0x2>
+		_delay_ms(1000);
+		PORTC &= ~(1<<PC1);
+		_delay_ms(1000);	
+	}
+	
+}
+  d8:	08 95       	ret
+
+000000da <enable_Bluetooth>:
+
+void enable_Bluetooth(){
+	PORTC |=1<<PC2;
+  da:	aa 9a       	sbi	0x15, 2	; 21
+  dc:	87 ea       	ldi	r24, 0xA7	; 167
+  de:	91 e6       	ldi	r25, 0x61	; 97
+  e0:	01 97       	sbiw	r24, 0x01	; 1
+  e2:	f1 f7       	brne	.-4      	; 0xe0 <enable_Bluetooth+0x6>
+  e4:	00 c0       	rjmp	.+0      	; 0xe6 <enable_Bluetooth+0xc>
+  e6:	00 00       	nop
+	_delay_ms(100);
+}
+  e8:	08 95       	ret
+
+000000ea <disable_Bluetooth>:
+
+
+void disable_Bluetooth(){
+	PORTC &= ~(1<<PC2);
+  ea:	aa 98       	cbi	0x15, 2	; 21
+  ec:	87 ea       	ldi	r24, 0xA7	; 167
+  ee:	91 e6       	ldi	r25, 0x61	; 97
+  f0:	01 97       	sbiw	r24, 0x01	; 1
+  f2:	f1 f7       	brne	.-4      	; 0xf0 <disable_Bluetooth+0x6>
+  f4:	00 c0       	rjmp	.+0      	; 0xf6 <disable_Bluetooth+0xc>
+  f6:	00 00       	nop
+	_delay_ms(100);
+}
+  f8:	08 95       	ret
+
+000000fa <capture>:
+
+
+uint8_t capture(){ return PINB;}
+  fa:	86 b3       	in	r24, 0x16	; 22
+  fc:	08 95       	ret
+
+000000fe <compare_caps>:
+uint8_t compare_caps(uint8_t cap1 , uint8_t cap2){
+	if(cap2 == 0x00){
+  fe:	66 23       	and	r22, r22
+ 100:	21 f0       	breq	.+8      	; 0x10a <compare_caps+0xc>
+		/* random disrupt */
+	}else if( cap2 != cap1){
+ 102:	68 17       	cp	r22, r24
+ 104:	11 f4       	brne	.+4      	; 0x10a <compare_caps+0xc>
+ 106:	86 2f       	mov	r24, r22
+ 108:	08 95       	ret
+	}else if( cap2 == cap1){
+			
+		return cap2;
+	}
+	
+}
+ 10a:	08 95       	ret
+
+0000010c <select_action>:
+
+char select_action(uint8_t choice){
+	
+	//20 possibilities
+	switch(choice){
+ 10c:	88 30       	cpi	r24, 0x08	; 8
+ 10e:	61 f0       	breq	.+24     	; 0x128 <select_action+0x1c>
+ 110:	89 30       	cpi	r24, 0x09	; 9
+ 112:	18 f4       	brcc	.+6      	; 0x11a <select_action+0xe>
+ 114:	84 30       	cpi	r24, 0x04	; 4
+ 116:	79 f4       	brne	.+30     	; 0x136 <select_action+0x2a>
+ 118:	05 c0       	rjmp	.+10     	; 0x124 <select_action+0x18>
+ 11a:	88 31       	cpi	r24, 0x18	; 24
+ 11c:	51 f0       	breq	.+20     	; 0x132 <select_action+0x26>
+ 11e:	88 38       	cpi	r24, 0x88	; 136
+ 120:	51 f4       	brne	.+20     	; 0x136 <select_action+0x2a>
+ 122:	0b c0       	rjmp	.+22     	; 0x13a <select_action+0x2e>
+		PORTC &= ~(1<<PC4);
+		PORTC &= ~(1<<PC3);
+		return 'R';		
+		case S:
+		/* code */
+		return 'S';
+ 124:	83 e5       	ldi	r24, 0x53	; 83
+ 126:	08 95       	ret
+	//20 possibilities
+	switch(choice){
+		
+		case R:
+		
+		PORTC |=1<<PC5; /* PC5 instead of PD7 */
+ 128:	ad 9a       	sbi	0x15, 5	; 21
+		PORTC &= ~(1<<PC4);
+ 12a:	ac 98       	cbi	0x15, 4	; 21
+		PORTC &= ~(1<<PC3);
+ 12c:	ab 98       	cbi	0x15, 3	; 21
+		return 'R';		
+ 12e:	82 e5       	ldi	r24, 0x52	; 82
+ 130:	08 95       	ret
+		/* code */
+		return 'T';
+		
+		case U:
+		/* code */
+		return 'U';
+ 132:	85 e5       	ldi	r24, 0x55	; 85
+ 134:	08 95       	ret
+		
+		
+		default:
+		return 'P';
+ 136:	80 e5       	ldi	r24, 0x50	; 80
+ 138:	08 95       	ret
+		/* code */
+		return 'S';
+		
+		case T:
+		/* code */
+		return 'T';
+ 13a:	84 e5       	ldi	r24, 0x54	; 84
+		return 'P';
+		
+	}
+	
+	
+}
+ 13c:	08 95       	ret
+
+0000013e <send_by_Bluetooth>:
+
+void send_by_Bluetooth( char msg){
+	USART_TxChar(msg);	
+ 13e:	a3 df       	rcall	.-186    	; 0x86 <USART_TxChar>
+}
+ 140:	08 95       	ret
+
+00000142 <recieve_by_Bluetooth>:
+
+char recieve_by_Bluetooth(){
+	USART_RxChar();	
+ 142:	9d df       	rcall	.-198    	; 0x7e <USART_RxChar>
+}
+ 144:	08 95       	ret
+
+00000146 <take_action>:
+
+
+void take_action(uint8_t cap1 , uint8_t cap2){
+ 146:	ff 92       	push	r15
+ 148:	0f 93       	push	r16
+ 14a:	1f 93       	push	r17
+ 14c:	f6 2e       	mov	r15, r22
+	char msg1 , msg2;
+	msg1= select_action( compare_caps(cap1,cap2) );
+ 14e:	d7 df       	rcall	.-82     	; 0xfe <compare_caps>
+ 150:	dd df       	rcall	.-70     	; 0x10c <select_action>
+ 152:	08 2f       	mov	r16, r24
+	
+	enable_SIM();
+ 154:	aa df       	rcall	.-172    	; 0xaa <enable_SIM>
+	enable_Bluetooth();
+ 156:	c1 df       	rcall	.-126    	; 0xda <enable_Bluetooth>
+	
+	while(msg2 !=msg1){
+ 158:	10 e0       	ldi	r17, 0x00	; 0
+ 15a:	01 17       	cp	r16, r17
+ 15c:	31 f0       	breq	.+12     	; 0x16a <take_action+0x24>
+		send_by_Bluetooth(msg1);
+ 15e:	80 2f       	mov	r24, r16
+ 160:	ee df       	rcall	.-36     	; 0x13e <send_by_Bluetooth>
+		msg2 = recieve_by_Bluetooth();		
+ 162:	ef df       	rcall	.-34     	; 0x142 <recieve_by_Bluetooth>
+ 164:	18 2f       	mov	r17, r24
+	msg1= select_action( compare_caps(cap1,cap2) );
+	
+	enable_SIM();
+	enable_Bluetooth();
+	
+	while(msg2 !=msg1){
+ 166:	08 17       	cp	r16, r24
+ 168:	d1 f7       	brne	.-12     	; 0x15e <take_action+0x18>
+		send_by_Bluetooth(msg1);
+		msg2 = recieve_by_Bluetooth();		
+	}
+	
+	//useless
+	disable_Bluetooth();
+ 16a:	bf df       	rcall	.-130    	; 0xea <disable_Bluetooth>
+	//useless
+	enable_SIM();
+ 16c:	9e df       	rcall	.-196    	; 0xaa <enable_SIM>
+	//useless line
+	enable_Bluetooth();
+ 16e:	b5 df       	rcall	.-150    	; 0xda <enable_Bluetooth>
+	
+	uint8_t cap3 = capture();
+ 170:	c4 df       	rcall	.-120    	; 0xfa <capture>
+	if(cap3 == P ) send_by_Bluetooth('P');
+ 172:	88 23       	and	r24, r24
+ 174:	19 f4       	brne	.+6      	; 0x17c <take_action+0x36>
+ 176:	80 e5       	ldi	r24, 0x50	; 80
+ 178:	e2 df       	rcall	.-60     	; 0x13e <send_by_Bluetooth>
+ 17a:	05 c0       	rjmp	.+10     	; 0x186 <take_action+0x40>
+	else if( cap3 != cap2 ){
+ 17c:	8f 15       	cp	r24, r15
+ 17e:	19 f0       	breq	.+6      	; 0x186 <take_action+0x40>
+		PORTC |= 1<<PC2;
+ 180:	aa 9a       	sbi	0x15, 2	; 21
+		send_by_Bluetooth(msg2);
+ 182:	81 2f       	mov	r24, r17
+ 184:	dc df       	rcall	.-72     	; 0x13e <send_by_Bluetooth>
+	}	
+	
+}
+ 186:	1f 91       	pop	r17
+ 188:	0f 91       	pop	r16
+ 18a:	ff 90       	pop	r15
+ 18c:	08 95       	ret
+
+0000018e <main>:
+void send_by_Bluetooth( char msg);
+char recieve_by_Bluetooth();
+void take_action(uint8_t cap1 , uint8_t cap2);
+
+int main(void)
+{
+ 18e:	1f 93       	push	r17
+	DDRB = 0xff;		/* make PORT as input port */
+ 190:	8f ef       	ldi	r24, 0xFF	; 255
+ 192:	87 bb       	out	0x17, r24	; 23
+	DDRC = 0x00;		/* make PORT as output port */
+ 194:	14 ba       	out	0x14, r1	; 20
+	USART_Init(9600);	/* initialize USART with 9600 baud rate */
+ 196:	80 e8       	ldi	r24, 0x80	; 128
+ 198:	95 e2       	ldi	r25, 0x25	; 37
+ 19a:	4e df       	rcall	.-356    	; 0x38 <USART_Init>
+	
+	/**********************************************/
+	
+	PORTC |= 1<<PC0;
+ 19c:	a8 9a       	sbi	0x15, 0	; 21
+	uint8_t cap1 = capture();
+ 19e:	ad df       	rcall	.-166    	; 0xfa <capture>
+ 1a0:	18 2f       	mov	r17, r24
+ 1a2:	8f e3       	ldi	r24, 0x3F	; 63
+ 1a4:	9d e0       	ldi	r25, 0x0D	; 13
+ 1a6:	a3 e0       	ldi	r26, 0x03	; 3
+ 1a8:	81 50       	subi	r24, 0x01	; 1
+ 1aa:	90 40       	sbci	r25, 0x00	; 0
+ 1ac:	a0 40       	sbci	r26, 0x00	; 0
+ 1ae:	e1 f7       	brne	.-8      	; 0x1a8 <main+0x1a>
+ 1b0:	00 c0       	rjmp	.+0      	; 0x1b2 <main+0x24>
+ 1b2:	00 00       	nop
+	_delay_ms(1000);
+	uint8_t cap2 = capture();
+ 1b4:	a2 df       	rcall	.-188    	; 0xfa <capture>
+ 1b6:	68 2f       	mov	r22, r24
+	
+	take_action(cap1 , cap2);
+ 1b8:	81 2f       	mov	r24, r17
+ 1ba:	c5 df       	rcall	.-118    	; 0x146 <take_action>
+
+	/**********************************************/
+			
+return 0;
+
+}
+ 1bc:	80 e0       	ldi	r24, 0x00	; 0
+ 1be:	90 e0       	ldi	r25, 0x00	; 0
+ 1c0:	1f 91       	pop	r17
+ 1c2:	08 95       	ret
+
+000001c4 <__udivmodsi4>:
+ 1c4:	a1 e2       	ldi	r26, 0x21	; 33
+ 1c6:	1a 2e       	mov	r1, r26
+ 1c8:	aa 1b       	sub	r26, r26
+ 1ca:	bb 1b       	sub	r27, r27
+ 1cc:	fd 01       	movw	r30, r26
+ 1ce:	0d c0       	rjmp	.+26     	; 0x1ea <__udivmodsi4_ep>
+
+000001d0 <__udivmodsi4_loop>:
+ 1d0:	aa 1f       	adc	r26, r26
+ 1d2:	bb 1f       	adc	r27, r27
+ 1d4:	ee 1f       	adc	r30, r30
+ 1d6:	ff 1f       	adc	r31, r31
+ 1d8:	a2 17       	cp	r26, r18
+ 1da:	b3 07       	cpc	r27, r19
+ 1dc:	e4 07       	cpc	r30, r20
+ 1de:	f5 07       	cpc	r31, r21
+ 1e0:	20 f0       	brcs	.+8      	; 0x1ea <__udivmodsi4_ep>
+ 1e2:	a2 1b       	sub	r26, r18
+ 1e4:	b3 0b       	sbc	r27, r19
+ 1e6:	e4 0b       	sbc	r30, r20
+ 1e8:	f5 0b       	sbc	r31, r21
+
+000001ea <__udivmodsi4_ep>:
+ 1ea:	66 1f       	adc	r22, r22
+ 1ec:	77 1f       	adc	r23, r23
+ 1ee:	88 1f       	adc	r24, r24
+ 1f0:	99 1f       	adc	r25, r25
+ 1f2:	1a 94       	dec	r1
+ 1f4:	69 f7       	brne	.-38     	; 0x1d0 <__udivmodsi4_loop>
+ 1f6:	60 95       	com	r22
+ 1f8:	70 95       	com	r23
+ 1fa:	80 95       	com	r24
+ 1fc:	90 95       	com	r25
+ 1fe:	9b 01       	movw	r18, r22
+ 200:	ac 01       	movw	r20, r24
+ 202:	bd 01       	movw	r22, r26
+ 204:	cf 01       	movw	r24, r30
+ 206:	08 95       	ret
+
+00000208 <_exit>:
+ 208:	f8 94       	cli
+
+0000020a <__stop_program>:
+ 20a:	ff cf       	rjmp	.-2      	; 0x20a <__stop_program>
